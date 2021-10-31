@@ -16,9 +16,12 @@
 python shanxunhelper.py
 ```
 
-可以clone仓库，安装vituralenv，进入script输入
+## 编译为exe
+
+git clone本仓库，并安装vituralenv，powershell进入仓库目录输入
 
 ```shell
+cd .\Script\
 .\activate
 cd ..
 pyinstaller -F --onefile -i icon.ico rebootrouter.py 
@@ -34,5 +37,7 @@ pyinstaller -F --onefile -i icon.ico rebootrouter.py
 
 ## 效果图
 
+非常简陋，希望有大佬改改
 
+![](https://cdn.jsdelivr.net/gh/Xunflash/openwrt-shanxunhelper-python@1.0/photos/xiaoguo.png)
 
