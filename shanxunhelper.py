@@ -2,9 +2,26 @@ import requests
 import json
 import os
 
+#在此处输入配置即可使用
+
+url="192.168.1.1"       #路由器网关url
+
+yidongusername=""       #移动账号
+
+yidongpassword=""       #移动密码
+
+yidongservice=""        #移动服务名
+
+dianxinusername=""      #电信账号
+
+dianxinservice=""       #电信服务名，闪讯一般留空即可
+
+#电信密码由于经常换，在程序内输入即可
+
+
 #获取id内容
 def get(id):
-    url1='http://192.168.1.1/cgi-bin/luci/rpc/uci?auth='+token
+    url1='http://'+url+'/cgi-bin/luci/rpc/uci?auth='+token
     
     getid={
     "method":"get",
@@ -27,7 +44,7 @@ def getall():
 
 #设置id内容
 def set(id,content):
-    url1='http://192.168.1.1/cgi-bin/luci/rpc/uci?auth='+token
+    url1='http://'+url+'/cgi-bin/luci/rpc/uci?auth='+token
 
     setid={
         "method":"set",
@@ -40,9 +57,9 @@ def set(id,content):
 
 #设置成移动网
 def yidong():
-    result1=set("username","")
-    result2=set("password","")
-    result3=set("service","")
+    result1=set("username",yidongusername)
+    result2=set("password",yidongpassword)
+    result3=set("service",yidongservice)
 
     if(result1 and result2 and result3):
         print("set success")
@@ -51,9 +68,9 @@ def yidong():
 
 #设置成电信网
 def dianxin(id):
-    result1=set("username","")
+    result1=set("username",dianxinusername)
     result2=set("password",id)
-    result3=set("service","")
+    result3=set("service",dianxinservice)
 
     if(result1 and result2 and result3):
         print("set success")
@@ -61,7 +78,7 @@ def dianxin(id):
         print('error,set again')
 #重启wan网口（断网的时候用，排除路由器问题）
 def restartwan():
-    url2='http://192.168.1.1/cgi-bin/luci/rpc/sys?auth='+token
+    url2='http://'+url+'/cgi-bin/luci/rpc/sys?auth='+token
 
     restartwan={
         "method":"exec",
@@ -71,12 +88,12 @@ def restartwan():
     re=json.loads(requests.post(url2,data=json.dumps(restartwan)).text)['result']
 
     if(re==''):
-        os.system("echo Reboot success")
+        print("Reboot success")
     else:
-        os.system("echo Reboot failed")
+        print("Reboot failed")
 #提交所有设置
 def commitsettings():
-    url1='http://192.168.1.1/cgi-bin/luci/rpc/uci?auth='+token
+    url1='http://'+url+'/cgi-bin/luci/rpc/uci?auth='+token
 
     commit={
         "method":"commit",
@@ -95,7 +112,7 @@ def menu():
     print("5.退出")
 
 #获取token
-url0 = 'http://192.168.1.1/cgi-bin/luci/rpc/auth'
+url0 = 'http://'+url+'/cgi-bin/luci/rpc/auth'
 
 data = {
     "method":"login",
