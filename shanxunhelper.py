@@ -40,9 +40,9 @@ def set(id,content):
 
 #设置成移动网
 def yidong():
-    result1=set("username","jhwcl11350690")
-    result2=set("password","030214")
-    result3=set("service","JHDY-GSXY-MX960-1")
+    result1=set("username","")
+    result2=set("password","")
+    result3=set("service","")
 
     if(result1 and result2 and result3):
         print("set success")
@@ -51,7 +51,7 @@ def yidong():
 
 #设置成电信网
 def dianxin(id):
-    result1=set("username","13385897967@ZSD.XY")
+    result1=set("username","")
     result2=set("password",id)
     result3=set("service","")
 
